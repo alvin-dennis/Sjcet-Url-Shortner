@@ -12,6 +12,6 @@
   "devDependencies": {
     "typescript": "^5.2.2",
     "ts-node": "^10.9.1",
-    "vercel": "^32.4.1"
+    "vercel": "^42.0.0"
   }
 }
