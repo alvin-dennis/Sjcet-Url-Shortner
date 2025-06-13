@@ -92,4 +92,4 @@ auth.post("/logout", async (c) => {
   });
 });
 
-export default auth;
+export default authRoutes;
