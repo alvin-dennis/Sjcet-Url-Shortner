@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
-import auth from "./auth.js";
+import auth from "../routes/auth.js";
 
 const app = new Hono();
 
@@ -20,10 +20,10 @@ app.get("/health", (c) => {
   });
 });
 
-function getAllRoutes(app: Hono) {
-  const routes: { method: string; path: string }[] = [];
-  const honoRoutes = (app as any)._routes || [];
-  honoRoutes.forEach((route: any) => {
+function getAllRoutes(app) {
+  const routes = [];
+  const honoRoutes = app._routes || [];
+  honoRoutes.forEach((route) => {
     if (route.path && route.method) {
       routes.push({
         method: route.method,
@@ -44,7 +44,6 @@ app.get("/endpoints", (c) => {
   });
 });
 
-serve(
-  { port: 3000, fetch: app.fetch },
-  (i) => console.log(`listening on port ${i.port}`)
+serve({ port: 3000, fetch: app.fetch }, (i) =>
+  console.log(`listening on port ${i.port}`)
 );
