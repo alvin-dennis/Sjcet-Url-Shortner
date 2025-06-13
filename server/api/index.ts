@@ -1,7 +1,10 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
+import auth from "./auth.js";
 
 const app = new Hono();
+
+app.route("/auth", auth);
 
 app.get("/", (c) => {
   return c.json({
