@@ -9,8 +9,10 @@
 .idea/usage.statistics.xml
 .idea/shelf
 
+
 # deps
 node_modules/
+package-lock.json
 
 # env
 .env
