@@ -9,6 +9,10 @@
 .idea/usage.statistics.xml
 .idea/shelf
 
+# build
+# build artifacts
+packagelock.json
+
 # deps
 node_modules/
 
