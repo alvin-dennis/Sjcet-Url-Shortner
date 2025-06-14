@@ -9,12 +9,10 @@
 .idea/usage.statistics.xml
 .idea/shelf
 
-# build
-# build artifacts
-package-lock.json
 
 # deps
 node_modules/
+package-lock.json
 
 # env
 .env

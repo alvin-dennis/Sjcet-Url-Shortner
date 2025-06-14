@@ -1,12 +1,13 @@
-import { Hono } from "hono";
+import { Hono } from "hono"; 
 import { supabase } from "../utils/supabaseClient.js";
 import bcrypt from "bcryptjs";
 
-const auth = new Hono();
+const authRoutes = new Hono();
 
-auth.post("/signup", async (c) => {
-  const { name, email, password, dept, year, phone, role } = await c.req.json();
-  if (!name || !email || !password || !dept || !year || !phone || !role) {
+authRoutes.post("/signup", async (c) => {
+  const { id, name, email, password, dept, year, phone, role } = await c.req.json();
+
+  if (!id || !name || !email || !password || !dept || !year || !phone || !role) {
     return c.json({ error: "Missing fields" }, 400);
   }
 
@@ -17,13 +18,9 @@ auth.post("/signup", async (c) => {
 
   const domainRegex = /@([\w-]+\.)?sjcetpalai\.ac\.in$/;
   if (!domainRegex.test(email)) {
-    return c.json(
-      {
-        error:
-          "Email must be from sjcetpalai.ac.in domain or a department subdomain",
-      },
-      400
-    );
+    return c.json({
+      error: "Email must be from sjcetpalai.ac.in domain or a department subdomain",
+    }, 400);
   }
 
   const { data: existing } = await supabase
@@ -35,12 +32,31 @@ auth.post("/signup", async (c) => {
     return c.json({ error: "Email already registered" }, 400);
   }
 
+  const { data: existingId } = await supabase
+    .from("users")
+    .select("id")
+    .eq("id", id)
+    .single();
+  if (existingId) {
+    return c.json({ error: "ID already registered" }, 400);
+  }
+
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const { error } = await supabase
     .from("users")
     .insert([
-      { name, email, password: hashedPassword, dept, year, phone, role },
+      {
+        id,
+        name,
+        email,
+        password: hashedPassword,
+        dept,
+        year,
+        phone,
+        role,
+        urlCount: 0,
+      },
     ]);
   if (error) {
     return c.json({ error: error.message }, 500);
@@ -48,7 +64,7 @@ auth.post("/signup", async (c) => {
   return c.json({ message: "Signup successful" });
 });
 
-auth.post("/login", async (c) => {
+authRoutes.post("/login", async (c) => {
   const { email, password } = await c.req.json();
   if (!email || !password) {
     return c.json({ error: "Missing email or password" }, 400);
@@ -80,16 +96,24 @@ auth.post("/login", async (c) => {
 
   return c.json({
     message: "Login successful",
-    user: { id: user.id, name: user.name, email: user.email, role: user.role, dept: user.dept, year: user.year, url_count:user.urlCount},
-    urls: urls
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      dept: user.dept,
+      year: user.year,
+      url_count: user.urlCount,
+    },
+    urls,
   });
 });
 
-auth.post("/logout", async (c) => {
+authRoutes.post("/logout", async (c) => {
   return c.json({
     message: "Logout successful",
     success: true
   });
 });
 
-export default auth;
+export default authRoutes;
