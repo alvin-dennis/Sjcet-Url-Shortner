@@ -1,10 +1,12 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import authRoutes from "../routes/auth.js";
+import dashboardRoutes from "../routes/dashboard.js";
 
 const app = new Hono();
 
 app.route("/auth", authRoutes);
+app.route("/dashboard", dashboardRoutes);
 
 app.get("/", (c) => {
   return c.json({
