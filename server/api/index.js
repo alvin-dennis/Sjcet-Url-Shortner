@@ -2,11 +2,14 @@ import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import authRoutes from "../routes/auth.js";
 import dashboardRoutes from "../routes/dashboard.js";
+import shortenRoutes from "../routes/shorten.js"; // Uncomment if you have a shorten route
 
 const app = new Hono();
 
 app.route("/auth", authRoutes);
+app.route("/shorten", shortenRoutes); 
 app.route("/dashboard", dashboardRoutes);
+
 
 app.get("/", (c) => {
   return c.json({
