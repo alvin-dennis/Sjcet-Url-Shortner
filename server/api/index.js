@@ -6,19 +6,19 @@ import shortenRoutes from "../routes/shorten.js"; // Uncomment if you have a sho
 
 const app = new Hono();
 
-app.route("/auth", authRoutes);
-app.route("/shorten", shortenRoutes); 
-app.route("/dashboard", dashboardRoutes);
+app.route("/api/auth", authRoutes);
+app.route("/api/shorten", shortenRoutes);
+app.route("/api/dashboard", dashboardRoutes);
 
 
-app.get("/", (c) => {
+app.get("/api/", (c) => {
   return c.json({
     message: "Shortx server is running",
     status: "success",
   });
 });
 
-app.get("/health", (c) => {
+app.get("/api/health", (c) => {
   return c.json({
     message: "API is healthy",
     status: "success",
