@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 
-import Login from './Login.module.jsx'
+import Login from './Login/Login'
 import Landing from './landing/Landing'
 
 
