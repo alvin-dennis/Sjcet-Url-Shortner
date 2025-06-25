@@ -1,0 +1,255 @@
+/* Login page styles for ShortX */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0b0b1f;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+.background {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  background: radial-gradient(circle at 30% 30%, #3a0ca3, transparent 50%),
+              radial-gradient(circle at 70% 60%, #7209b7, transparent 60%),
+              radial-gradient(circle at 50% 90%, #4361ee, transparent 70%);
+  opacity: 0.15;
+}
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.22) 0 3px, transparent 3px 80px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.22) 0 3px, transparent 3px 80px);
+  mask-image: linear-gradient(to left, white 0 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, white 0 60%, transparent 100%);
+}
+.glow-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #a18aff 0%, transparent 70%);
+  opacity: 0.7;
+  filter: blur(12px);
+  z-index: 2;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #fff 0%, #a18aff 60%, transparent 100%);
+  border-radius: 50%;
+  opacity: 0.85;
+  z-index: 3;
+  filter: blur(1px);
+  pointer-events: none;
+}
+.dotted-square {
+  position: absolute;
+  border: 2px dashed rgba(255,255,255,0.18);
+  border-radius: 6px;
+  box-sizing: border-box;
+  z-index: 2;
+  pointer-events: none;
+  background: none;
+}
+.grid-square {
+  position: absolute;
+  border: 2px dashed rgba(255,255,255,0.18);
+  border-radius: 8px;
+  box-sizing: border-box;
+  z-index: 2;
+  pointer-events: none;
+  background: none;
+}
+.header {
+  position: absolute;
+  top: 32px;
+  left: 48px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  display: inline-block;
+}
+.logo-text {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #fff;
+}
+.top-right-text {
+  position: absolute;
+  top: 36px;
+  right: 48px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.top-right-text .bolt {
+  font-size: 1.2em;
+  margin-left: 2px;
+}
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  position: relative;
+}
+.login-form {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 0 6px rgba(80, 60, 180, 0.12), 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+  width: 400px;
+  max-width: 90vw;
+  padding: 44px 38px 36px 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: #222;
+  border: 2px solid rgba(80, 60, 180, 0.12);
+}
+.login-form h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 28px;
+  text-align: left;
+}
+.login-form label {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  padding: 12px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #fafaff;
+  color: #222;
+  margin-bottom: 10px;
+}
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus {
+  border-color: #6c63ff;
+}
+.password-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+.forgot {
+  font-size: 0.97rem;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: text-decoration 0.2s;
+}
+.forgot:hover {
+  text-decoration: underline;
+}
+.login-form button[type="submit"] {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-bottom: 18px;
+  transition: background 0.2s;
+  width: 100%;
+}
+.login-form button[type="submit"]:hover {
+  background: #1749b1;
+}
+.signup-link {
+  text-align: center;
+  font-size: 1rem;
+  color: #888;
+}
+.signup-link a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 4px;
+  transition: text-decoration 0.2s;
+}
+.signup-link a:hover {
+  text-decoration: underline;
+}
+.galaxy-light {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 500px;
+  background: radial-gradient(circle at 50% 30%, rgba(160,120,255,0.95) 0%, rgba(120,80,255,0.65) 40%, rgba(80,40,180,0.35) 70%, transparent 100%);
+  filter: blur(18px);
+  opacity: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+.bottom-left-light {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 600px;
+  height: 340px;
+  background: radial-gradient(circle at 0% 100%, rgba(120,80,255,0.32) 0%, transparent 80%);
+  filter: blur(24px);
+  opacity: 1;
+  z-index: 2;
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .login-form {
+    padding: 24px 8px 20px 8px;
+    margin-top: 60px;
+  }
+  .header, .top-right-text {
+    left: 12px;
+    right: 12px;
+    top: 16px;
+  }
+}
