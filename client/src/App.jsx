@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 
+import Login from './Login/Login'
+import Landing from './landing/Landing'
+
 function App() {
      const [user, setUser] = useState(null)
      const [isLogin, setIsLogin] = useState(true)
      const [loading, setLoading] = useState(false)
      const [error, setError] = useState('')
      const [showPassword, setShowPassword] = useState(false)
-
 
      const [formData, setFormData] = useState({
           name: '',
@@ -51,7 +53,7 @@ function App() {
                     if (isLogin) {
                          setUser(data.user)
                     } else {
-                         setIsLogin(true) // Switch to login after successful signup
+                         setIsLogin(true)
                          alert('Signup successful! Please login.')
                     }
                } else {
@@ -71,7 +73,6 @@ function App() {
           })
      }
 
-     // Show dashboard if user is logged in
      if (user) {
           return (
                <div className="dashboard">
@@ -102,7 +103,6 @@ function App() {
           )
      }
 
-     // Show login/signup form if not logged in
      return (
           <div className="auth-container">
                <div className="auth-box">
@@ -129,8 +129,6 @@ function App() {
                     <form onSubmit={handleAuth}>
                          {!isLogin && (
                               <>
-
-{/* Name field */}
                                    <div className="form-field">
                                         <label htmlFor="name">Name</label>
                                         <input
@@ -144,7 +142,6 @@ function App() {
                                         />
                                    </div>
 
-{/* Dept field */}
                                    <div className="form-field">
                                         <label htmlFor="dept">Department</label>
                                         <select
@@ -167,7 +164,6 @@ function App() {
                                         </select>
                                    </div>
 
-{/* Year field */}
                                    <div className="form-field">
                                         <label htmlFor="year">Year</label>
                                         <select
@@ -189,7 +185,6 @@ function App() {
                                         </select>
                                    </div>
 
-{/* Phone field */}
                                    <div className="form-field">
                                         <label htmlFor="phone">Phone Number</label>
                                         <input
@@ -205,7 +200,6 @@ function App() {
                                         />
                                    </div>
 
-{/* Role field */}
                                    <div className="form-field">
                                         <label htmlFor="role">Role</label>
                                         <select
@@ -222,7 +216,6 @@ function App() {
                               </>
                          )}
 
-{/* Name field */}
                          {isLogin && (
                               <div className="form-field">
                                    <label htmlFor="login-name">Name</label>
@@ -238,7 +231,6 @@ function App() {
                               </div>
                          )}
 
-{/* College email field */}
                          <div className="form-field">
                               <label htmlFor="email">Email</label>
                               <input
@@ -254,7 +246,6 @@ function App() {
                               />
                          </div>
 
-{/* password field */}
                          <div className="form-field password-field">
                               <label htmlFor="password">Password</label>
                               <div className="password-wrapper">
@@ -275,7 +266,6 @@ function App() {
                                    </span>
                               </div>
                          </div>
-
 
                          <button type="submit" disabled={loading}>
                               {loading ? 'Please wait...' : (isLogin ? 'Login' : 'Sign Up')}
