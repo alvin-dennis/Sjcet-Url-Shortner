@@ -4,7 +4,7 @@ export const DEPARTMENTS = [
      { value: 'CSE', label: 'Computer Science' },
      { value: 'CSAI', label: 'CS(AI)' },
      { value: 'CY', label: 'Cyber' },
-     { value: 'AI-DS', label: 'AI and Data Science' },
+     { value: 'AI_DS', label: 'AI and Data Science' },
      { value: 'ECS', label: 'Electronics and Computer' },
      { value: 'ECE', label: 'Electronics and Communication' },
      { value: 'EEE', label: 'Electrical and Electronics' },
