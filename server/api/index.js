@@ -1,26 +1,34 @@
 import { Hono } from "hono";
 import { serve } from "@hono/node-server";
+import authRoutes from "../routes/auth.js";
+import dashboardRoutes from "../routes/dashboard.js";
+import shortenRoutes from "../routes/shorten.js"; // Uncomment if you have a shorten route
 
 const app = new Hono();
 
-app.get("/", (c) => {
+app.route("/api/auth", authRoutes);
+app.route("/api/shorten", shortenRoutes);
+app.route("/api/dashboard", dashboardRoutes);
+
+
+app.get("/api/", (c) => {
   return c.json({
     message: "Shortx server is running",
     status: "success",
   });
 });
 
-app.get("/health", (c) => {
+app.get("/api/health", (c) => {
   return c.json({
     message: "API is healthy",
     status: "success",
   });
 });
 
-function getAllRoutes(app: Hono) {
-  const routes: { method: string; path: string }[] = [];
-  const honoRoutes = (app as any)._routes || [];
-  honoRoutes.forEach((route: any) => {
+function getAllRoutes(app) {
+  const routes = [];
+  const honoRoutes = app._routes || [];
+  honoRoutes.forEach((route) => {
     if (route.path && route.method) {
       routes.push({
         method: route.method,
@@ -41,7 +49,6 @@ app.get("/endpoints", (c) => {
   });
 });
 
-serve(
-  { port: 3000, fetch: app.fetch },
-  (i) => console.log(`listening on port ${i.port}`)
+serve({ port: 3000, fetch: app.fetch }, (i) =>
+  console.log(`listening on port ${i.port}`)
 );
