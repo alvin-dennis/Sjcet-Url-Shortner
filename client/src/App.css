@@ -1,42 +1,294 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+* {
+     box-sizing: border-box;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.auth-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: 100vh;
+     padding: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.auth-box {
+     background: white;
+     padding: 2rem;
+     border-radius: 10px;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     width: 100%;
+     max-width: 600px;
+     text-align: center;
 }
 
-.card {
-  padding: 2em;
+.auth-box h1 {
+     color: #646cff;
+     margin-bottom: 0.5rem;
+     font-size: 2.5rem;
 }
 
-.read-the-docs {
-  color: #888;
+.auth-box p {
+     color: #666;
+     margin-bottom: 2rem;
+}
+
+.auth-toggle {
+     display: flex;
+     margin-bottom: 1.5rem;
+     border-radius: 8px;
+     overflow: hidden;
+     border: 1px solid #ddd;
+}
+
+.auth-toggle button {
+     flex: 1;
+     padding: 0.75rem;
+     border: none;
+     background: #f5f5f5;
+     color: #333;
+     cursor: pointer;
+     transition: all 0.3s;
+}
+
+.auth-toggle button.active {
+     background: #646cff;
+     color: white;
+}
+
+.auth-toggle button:hover:not(.active) {
+     background: #e0e0e0;
+     color: #333;
+}
+
+form {
+     display: flex;
+     flex-direction: column;
+     gap: 0.2rem;
+}
+
+input,
+select {
+     padding: 0.75rem;
+     border: 2px solid #ddd;
+     border-radius: 8px;
+     font-size: 1rem;
+     background: #f8f9fa;
+     color: #333;
+     transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+     outline: none;
+     border-color: #646cff;
+}
+
+input::placeholder,
+select option {
+     color: #888;
+}
+
+button[type="submit"] {
+     padding: 0.75rem;
+     background: #646cff;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     font-size: 1rem;
+     cursor: pointer;
+     transition: background 0.3s;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+     background: #535bf2;
+}
+
+button[type="submit"]:disabled {
+     background: #ccc;
+     cursor: not-allowed;
+}
+
+.error {
+     background: #ffebee;
+     color: #c62828;
+     padding: 0.75rem;
+     border-radius: 8px;
+     margin-bottom: 1rem;
+     border: 1px solid #ffcdd2;
+}
+
+.dashboard {
+     min-height: 100vh;
+}
+
+.dashboard header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 1rem 0;
+     border-bottom: 2px solid #f0f0f0;
+     margin-bottom: 2rem;
+}
+
+.dashboard h1 {
+     color: #646cff;
+     margin: 0;
+}
+
+.dashboard header div {
+     display: flex;
+     align-items: center;
+     gap: 1rem;
+}
+
+.dashboard header span {
+     font-weight: 500;
+     color: #333;
+}
+
+.dashboard header button {
+     padding: 0.5rem 1rem;
+     background: #ff4757;
+     color: white;
+     border: none;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: background 0.3s;
+}
+
+.dashboard header button:hover {
+     background: #ff3742;
+}
+
+.url-section {
+     background: white;
+     padding: 2rem;
+     border-radius: 10px;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     margin-bottom: 2rem;
+}
+
+.url-section h2 {
+     margin-top: 0;
+     color: #333;
+}
+
+.url-form {
+     display: flex;
+     gap: 1rem;
+     flex-wrap: wrap;
+}
+
+.url-form input {
+     flex: 1;
+     min-width: 300px;
+     padding: 0.75rem;
+     border: 2px solid #ddd;
+     border-radius: 8px;
+     font-size: 1rem;
+}
+
+.url-form button {
+     padding: 0.75rem 1.5rem;
+     background: #646cff;
+     color: white;
+     border: none;
+     border-radius: 8px;
+     cursor: pointer;
+     font-weight: 500;
+     transition: background 0.3s;
+}
+
+.url-form button:hover {
+     background: #535bf2;
+}
+
+.stats {
+     background: white;
+     padding: 2rem;
+     border-radius: 10px;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stats p {
+     margin: 0.5rem 0;
+     font-size: 1.1rem;
+     color: #555;
+}
+
+.stats p:first-child {
+     font-weight: bold;
+     color: #646cff;
+     font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+     .auth-box {
+          padding: 1.5rem;
+     }
+
+     .dashboard header {
+          flex-direction: column;
+          gap: 1rem;
+          text-align: center;
+     }
+
+     .url-form {
+          flex-direction: column;
+     }
+
+     .url-form input {
+          min-width: auto;
+     }
+}
+
+@media (max-width: 480px) {
+     #root {
+          padding: 0.5rem;
+     }
+
+     .auth-box {
+          padding: 1rem;
+     }
+
+     .auth-box h1 {
+          font-size: 2rem;
+     }
+}
+
+.password-wrapper {
+     position: relative;
+     display: flex;
+     align-items: center;
+}
+
+.password-wrapper input {
+     width: 100%;
+     padding-right: 2.5rem;
+}
+
+.toggle-eye {
+     position: absolute;
+     right: 0.75rem;
+     cursor: pointer;
+     user-select: none;
+     font-size: 1.2rem;
+     color: #646cff;
+}
+
+select {
+     appearance: none;
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24'%3E%3Cpath fill='%23646cff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+     background-repeat: no-repeat;
+     background-position: right 0.75rem center;
+     background-size: 1.3rem;
+     padding-right: 2.5rem;
+
 }
