@@ -1,8 +1,9 @@
 import { Hono } from "hono";
 import { supabase } from "../utils/supabaseClient.js";
+import { authenticateToken } from "./auth.js";
 
 const shortenRoutes = new Hono();
-shortenRoutes.post("/", async (c) => {
+shortenRoutes.post("/",authenticateToken, async (c) => {
   try {
     const { url, name } = await c.req.json();
 
@@ -25,6 +26,7 @@ shortenRoutes.post("/", async (c) => {
     }
 
     try {
+      const API_URL = process.env.API_URL || "https://your-shortener-service/api/shorten";
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
@@ -47,6 +49,8 @@ shortenRoutes.post("/", async (c) => {
 
       const responseData = await response.json();
 
+      const user = c.get("user");
+
       const { error } = await supabase.from("urls").insert([
         {
           originalUrl: url,
@@ -54,8 +58,8 @@ shortenRoutes.post("/", async (c) => {
           shortName: name,
           created_at: new Date().toISOString(),
           timestamp: new Date().toISOString(),
-          email: c.get("users")?.email || null,
-        },
+          email: user?.email || null, // Use JWT email 
+        },       
       ]);
 
       if (error) {

@@ -1,6 +1,21 @@
 import { Hono } from "hono";
 import { supabase } from "../utils/supabaseClient.js";
 import bcrypt from "bcryptjs";
+import {generateToken, verifyToken } from "../utils/jwt.js";
+
+// JWT middleware for Hono (for endpoints that need protection)
+export async function authenticateToken(c, next) {
+  const authHeader = c.req.header("authorization");
+  if (!authHeader) return c.json({ error: "Missing Authorization header" }, 401);
+
+  const token = authHeader.replace("Bearer ", "");
+  const user = verifyToken(token);
+
+  if (!user) return c.json({ error: "Invalid or expired token" }, 401);
+
+  c.set("user", user); // attach decoded user to context
+  await next();
+}
 
 const authRoutes = new Hono();
 
@@ -84,8 +99,18 @@ authRoutes.post("/login", async (c) => {
     return c.json({ error: "Invalid credentials" }, 401);
   }
 
+  const token = generateToken({
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    role: user.role,
+    dept: user.dept,
+    year: user.year,
+  });
+  
   return c.json({
     message: "Login successful",
+    token,
     user: {
       id: user.id,
       name: user.name,
