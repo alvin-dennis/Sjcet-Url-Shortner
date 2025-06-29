@@ -58,7 +58,7 @@ shortenRoutes.post("/",authenticateToken, async (c) => {
           shortName: name,
           created_at: new Date().toISOString(),
           timestamp: new Date().toISOString(),
-          email: user?.email || null, // Use JWT email 
+          email: user?.email || null,
         },       
       ]);
 
