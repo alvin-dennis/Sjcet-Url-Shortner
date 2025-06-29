@@ -1,13 +1,14 @@
 import { Hono } from "hono";
 import { supabase } from "../utils/supabaseClient.js";
+import { authenticateToken } from "./auth.js";
 
 const dashboardRoutes = new Hono();
 
-dashboardRoutes.get("/", async (c) => {
+dashboardRoutes.get("/",authenticateToken, async (c) => {
   try {
-    const email = c.req.query("email"); 
-    if (!email) {
-      return c.json({ success: false, message: "Email is required" }, 400);
+    const user = c.get("user"); 
+    if (!user || !user.email) {
+      return c.json({ success: false, message: "Unauthorized" }, 401);
     }
 
     const { data: userData, error: userError } = await supabase
