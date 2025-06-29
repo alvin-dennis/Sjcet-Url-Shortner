@@ -3,7 +3,7 @@ import { supabase } from "../utils/supabaseClient.js";
 import bcrypt from "bcryptjs";
 import {generateToken, verifyToken } from "../utils/jwt.js";
 
-// JWT middleware for Hono (for endpoints that need protection)
+
 export async function authenticateToken(c, next) {
   const authHeader = c.req.header("authorization");
   if (!authHeader) return c.json({ error: "Missing Authorization header" }, 401);
@@ -13,7 +13,7 @@ export async function authenticateToken(c, next) {
 
   if (!user) return c.json({ error: "Invalid or expired token" }, 401);
 
-  c.set("user", user); // attach decoded user to context
+  c.set("user", user); 
   await next();
 }
 
